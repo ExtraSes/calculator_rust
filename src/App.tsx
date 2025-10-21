@@ -15,82 +15,122 @@ function App() {
 
   
   return (
-    <Theme accentColor="crimson" grayColor="sand" radius="large" scaling="95%">
+    <Theme 
+      accentColor="crimson" 
+      grayColor="slate" 
+      radius="large" 
+      scaling="95%"
+      appearance="dark"
+      hasBackground={false}
+    >
       <main className="container">
-        <h1>Welcome to Tauri + React</h1>
+        <Flex direction="column" gap="6" align="center">
+          <Text size="8" weight="bold" style={{ color: 'white', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+            Welcome to Tauri + React
+          </Text>
 
-        <div className="row">
-          <a href="https://vite.dev" target="_blank">
-            <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-          </a>
-          <a href="https://tauri.app" target="_blank">
-            <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-          <a href="https://www.radix-ui.com/" target="_blank">
-            <img src="/radix.webp" className="logo radix" alt="Radix logo" />
-          </a>
-        </div>
-        <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-		<Flex direction="column" gap="2">
-			<Text>Hello from Radix Themes :</Text>
-      <TextArea placeholder="KAJLKYJLATOP" />
+          <Flex gap="4" wrap="wrap" justify="center">
+            <Box 
+              style={{ 
+                background: 'rgba(0, 0, 0, 0.4)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <a href="https://vite.dev" target="_blank">
+                <img src="/vite.svg" className="logo vite" alt="Vite logo" />
+              </a>
+            </Box>
+            
+            <Box 
+              style={{ 
+                background: 'rgba(0, 0, 0, 0.4)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <a href="https://tauri.app" target="_blank">
+                <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
+              </a>
+            </Box>
+            
+            <Box 
+              style={{ 
+                background: 'rgba(0, 0, 0, 0.4)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <a href="https://react.dev" target="_blank">
+                <img src={reactLogo} className="logo react" alt="React logo" />
+              </a>
+            </Box>
+            
+            <Box 
+              style={{ 
+                background: 'rgba(0, 0, 0, 0.4)',
+                backdropFilter: 'blur(20px)',
+                borderRadius: '20px',
+                padding: '1.5rem',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              <a href="https://www.radix-ui.com/" target="_blank">
+                <img src="/radix.png" className="logo radix" alt="Radix logo" />
+              </a>
+            </Box>
+          </Flex>
 
-      <div>
-			<Grid columns="3" gap="4" rows="repeat(3, 64px)" width="auto">
-	<Box><Button color="orange" variant="solid">
-		1
-	</Button></Box>
-	<Box><Button color="orange" variant="solid">
-		2
-	</Button></Box>
-	<Box><Button color="orange" variant="solid">
-		3
-	</Button></Box>
-	<Box><Button color="orange" variant="solid">
-		4
-	</Button></Box>
-	<Box><Button color="orange" variant="solid">
-		5
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		6
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		7
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		8
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		9
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		0
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		+
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		-
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		*
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		/
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		=
-	</Button></Box>
-  <Box><Button color="orange" variant="solid">
-		AC
-	</Button></Box>
-</Grid>
-</div>
-		</Flex>
+          <Text size="4" style={{ color: 'rgba(255, 255, 255, 0.9)', textAlign: 'center' }}>
+            Калькулятор Демид Эдишен
+          </Text>
+
+          <div className="calculator-container">
+            <div className="calculator-display">
+              0
+            </div>
+            
+            <div className="calculator-buttons">
+              <button className="calculator-button">C</button>
+              <button className="calculator-button">±</button>
+              <button className="calculator-button">%</button>
+              <button className="calculator-button operator">÷</button>
+              
+              <button className="calculator-button">7</button>
+              <button className="calculator-button">8</button>
+              <button className="calculator-button">9</button>
+              <button className="calculator-button operator">×</button>
+              
+              <button className="calculator-button">4</button>
+              <button className="calculator-button">5</button>
+              <button className="calculator-button">6</button>
+              <button className="calculator-button operator">-</button>
+              
+              <button className="calculator-button">1</button>
+              <button className="calculator-button">2</button>
+              <button className="calculator-button">3</button>
+              <button className="calculator-button operator">+</button>
+              
+              <button className="calculator-button" style={{ gridColumn: 'span 2' }}>0</button>
+              <button className="calculator-button">.</button>
+              <button className="calculator-button equals">=</button>
+            </div>
+          </div>
+        </Flex>
       </main>
     </Theme>
   );
