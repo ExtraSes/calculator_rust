@@ -86,7 +86,19 @@ pub fn calculate_result(state: tauri::State<CalculatorState>) -> String {
     if prev_value.is_some() && operation.is_some() {
         // Выполняем вычисление
         let new_value = calculate(prev_value.unwrap(), input_value, operation.as_ref().unwrap());
-        *display = format!("{}", new_value);  // Обновляем отображение
+        let result_str = format!("{}", new_value);
+        
+        // Просто выводим результат в консоль
+        let expression = format!("{} {} {} = {}", 
+            prev_value.unwrap(), 
+            operation.as_ref().unwrap(), 
+            input_value, 
+            result_str
+        );
+        
+        println!("🧮 Вычисление: {}", expression);
+        
+        *display = result_str;                // Обновляем отображение
         *prev_value = None;                   // Очищаем предыдущее значение
         *operation = None;                    // Очищаем операцию
         *waiting = true;                      // Готовы к новому вычислению
@@ -131,3 +143,4 @@ fn calculate(first: f64, second: f64, op: &str) -> f64 {
         _ => second,              // По умолчанию возвращаем второе число
     }
 }
+

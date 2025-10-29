@@ -1,0 +1,6 @@
+CREATE TABLE calculations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    expression VARCHAR(255) NOT NULL,
+    result VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

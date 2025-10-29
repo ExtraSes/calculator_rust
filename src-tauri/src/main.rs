@@ -4,6 +4,8 @@ use calculator::{input_digit, input_operation, calculate_result, clear_calculato
 use std::sync::Mutex;
 
 fn main() {
+    println!("🚀 Запуск простого калькулятора");
+    
     tauri::Builder::default()
         .manage(CalculatorState {
             display: Mutex::new("0".to_string()),

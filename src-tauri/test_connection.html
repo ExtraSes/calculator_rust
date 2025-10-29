@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест подключения к БД</title>
+</head>
+<body>
+    <h1>Тест подключения к базе данных</h1>
+    <button onclick="testConnection()">Проверить подключение</button>
+    <button onclick="testSave()">Тест сохранения</button>
+    <div id="result"></div>
+
+    <script>
+        async function testConnection() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Проверка подключения...';
+            
+            try {
+                const response = await fetch('http://192.168.1.92:8080/test_db_connection.php');
+                const text = await response.text();
+                resultDiv.innerHTML = '<pre>' + text + '</pre>';
+            } catch (error) {
+                resultDiv.innerHTML = 'Ошибка: ' + error.message;
+            }
+        }
+        
+        async function testSave() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Тест сохранения...';
+            
+            try {
+                const response = await fetch('http://192.168.1.92:8080/save_calculation.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        expression: '2 + 3 = 5',
+                        result: '5'
+                    })
+                });
+                
+                const text = await response.text();
+                resultDiv.innerHTML = '<pre>Статус: ' + response.status + '\nОтвет: ' + text + '</pre>';
+            } catch (error) {
+                resultDiv.innerHTML = 'Ошибка: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
