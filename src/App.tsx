@@ -4,16 +4,81 @@ import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 import { Flex, Text, Button, Theme, Grid, Box, TextArea } from "@radix-ui/themes";
 
+function Calculator() {
+  const [display, setDisplay] = useState('0');
+
+  const handleDigit = async (digit: string) => {
+    try {
+      const result = await invoke<string>('input_digit', { digit });
+      setDisplay(result);
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
+
+  const handleOperation = async (op: string) => {
+    try {
+      const result = await invoke<string>('input_operation', { op });
+      setDisplay(result);
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
+
+  const handleEquals = async () => {
+    try {
+      const result = await invoke<string>('calculate_result');
+      setDisplay(result);
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
+
+  const handleClear = async () => {
+    try {
+      const result = await invoke<string>('clear_calculator');
+      setDisplay(result);
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
+
+  return (
+    <div className="calculator-container">
+      <div className="calculator-display">
+        {display}
+      </div>
+      
+      <div className="calculator-buttons">
+        <button className="calculator-button" onClick={handleClear}>C</button>
+        <button className="calculator-button">±</button>
+        <button className="calculator-button">%</button>
+        <button className="calculator-button operator" onClick={() => handleOperation('/')}>÷</button>
+        
+        <button className="calculator-button" onClick={() => handleDigit('7')}>7</button>
+        <button className="calculator-button" onClick={() => handleDigit('8')}>8</button>
+        <button className="calculator-button" onClick={() => handleDigit('9')}>9</button>
+        <button className="calculator-button operator" onClick={() => handleOperation('*')}>×</button>
+        
+        <button className="calculator-button" onClick={() => handleDigit('4')}>4</button>
+        <button className="calculator-button" onClick={() => handleDigit('5')}>5</button>
+        <button className="calculator-button" onClick={() => handleDigit('6')}>6</button>
+        <button className="calculator-button operator" onClick={() => handleOperation('-')}>-</button>
+        
+        <button className="calculator-button" onClick={() => handleDigit('1')}>1</button>
+        <button className="calculator-button" onClick={() => handleDigit('2')}>2</button>
+        <button className="calculator-button" onClick={() => handleDigit('3')}>3</button>
+        <button className="calculator-button operator" onClick={() => handleOperation('+')}>+</button>
+        
+        <button className="calculator-button" style={{ gridColumn: 'span 2' }} onClick={() => handleDigit('0')}>0</button>
+        <button className="calculator-button" onClick={() => handleDigit('.')}>.</button>
+        <button className="calculator-button equals" onClick={handleEquals}>=</button>
+      </div>
+    </div>
+  );
+}
+
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
-
-  
   return (
     <Theme 
       accentColor="crimson" 
@@ -99,37 +164,7 @@ function App() {
             Калькулятор Демид Эдишен
           </Text>
 
-          <div className="calculator-container">
-            <div className="calculator-display">
-              0
-            </div>
-            
-            <div className="calculator-buttons">
-              <button className="calculator-button">C</button>
-              <button className="calculator-button">±</button>
-              <button className="calculator-button">%</button>
-              <button className="calculator-button operator">÷</button>
-              
-              <button className="calculator-button">7</button>
-              <button className="calculator-button">8</button>
-              <button className="calculator-button">9</button>
-              <button className="calculator-button operator">×</button>
-              
-              <button className="calculator-button">4</button>
-              <button className="calculator-button">5</button>
-              <button className="calculator-button">6</button>
-              <button className="calculator-button operator">-</button>
-              
-              <button className="calculator-button">1</button>
-              <button className="calculator-button">2</button>
-              <button className="calculator-button">3</button>
-              <button className="calculator-button operator">+</button>
-              
-              <button className="calculator-button" style={{ gridColumn: 'span 2' }}>0</button>
-              <button className="calculator-button">.</button>
-              <button className="calculator-button equals">=</button>
-            </div>
-          </div>
+          <Calculator />
         </Flex>
       </main>
     </Theme>
